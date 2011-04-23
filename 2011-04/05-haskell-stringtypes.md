@@ -90,7 +90,8 @@ Let's finish this post with a small example which puts `OverloadedStrings` featu
     import GHC.Exts (IsString(..))
     import Data.Char
 
-    data CasePreserving = CasePreserving { original :: String, lowerCase :: String }
+    data CasePreserving = CasePreserving { original :: String,
+                                           lowerCase :: String }
                           deriving (Eq, Show)
 
     instance IsString CasePreserving where
