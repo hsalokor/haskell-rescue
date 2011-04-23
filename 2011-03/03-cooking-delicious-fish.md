@@ -25,11 +25,11 @@ A common programming task in a networked world is to parse some input data comin
     parseAge s = case reads s of   
         [(age, "")] -> Just age   
         _           -> Nothing
-
+    
     maxVal :: Int -> Int -> Maybe Int
     maxVal x y | y > x = Nothing
                | otherwise = Just y
-
+    
     minVal :: Int -> Int -> Maybe Int
     minVal x y | y < x = Nothing
                | otherwise = Just y
