@@ -1,0 +1,26 @@
+[
+    {
+        "title": "First blog post",
+        "published": false,
+        "text": "Lorem ipsum dolor omet",
+        "comments": [
+            {
+                "author": "Anonymous",
+                "comment": "This sucks"
+            }
+        ]
+    },
+
+    {
+        "title": "Second blog post",
+        "published": false,
+        "text": "Again, lorem ipsum dolor omet",
+        "comments": [
+            {
+                "author": "Mr. Smith",
+                "email": "mr.smith@example.tld",
+                "comment": "No, it doesn't"
+            }
+        ]
+    }
+]
