@@ -6,26 +6,23 @@ Usually you just need to read some data (performace be damned), then there's a n
 
 ## Setting up
 
-First, install JSON parser module (at this writing, 0.4.4) using cabal.
+First, install JSON parser module called `Data.Aeson` (at this writing, 0.3.2.4) using cabal.
 
-~~~
-
-    cabal install json
+~~~ {.bash}
+    cabal install aeson
 ~~~
 
 The module Text.JSON has a submodule called Text.JSON.Generic. This module supports a form of introspection, which allows you to read data to existing data record with minimal fuzz.
 
-The trick requires GHC DeriveDataTypeable language extension, and thus the file must begin with following compiler pragma:
+The trick requires GHC `DeriveDataTypeable` language extension (we use `OverloadedStrings` for convenient automatic string conversions), and thus the file must begin with following compiler pragma:
 
-~~~ {.Haskell}
-
-    {-# LANGUAGE DeriveDataTypeable #-}
+~~~ {.haskell}
+    {-# LANGUAGE DeriveDataTypeable, OverloadedStrings #-}
 ~~~
 
-You'll also need `Data.Data` and `Data.Typeable` type classes:
+We'll also need `Data.Data` and `Data.Typeable` type classes:
 
-~~~ {.Haskell}
-
+~~~ {.haskell}
     import           Data.Typeable
     import           Data.Data
 ~~~

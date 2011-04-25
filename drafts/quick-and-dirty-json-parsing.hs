@@ -3,11 +3,12 @@ module Main where
 
 import           System.Environment(getArgs)
 
-import           Text.JSON()
-import           Text.JSON.Generic
+import           Data.Aeson.Types hiding (fromJSON)
+import           Data.Aeson.Generic
 import           Data.Typeable
 import           Data.Data
-import           System.IO.Error
+import           Data.Text hiding (head)
+import qualified Data.Text.IO as T
 
 data BlogComment = BlogComment {
         author  :: String,
@@ -24,17 +25,15 @@ data BlogEntry = BlogEntry {
     }
     deriving(Eq, Show, Data, Typeable)
 
-load :: String -> IO (Either IOError [BlogEntry])
-load d = do
-            result <- try $ decodeJSON d
-            return $ result
+parseEntries :: Text -> Result [BlogEntry]
+parseEntries input = fromJSON (String input)
 
 main :: IO ()
 main = do
     args <- getArgs
-    input <- readFile $ head args
-    entries <- load input 
-    case entries of
-        Left err      -> putStr "Failed to read JSON data: "
-        Right entries -> putStr $ show entries
+    input <- T.readFile $ head args
+    case parseEntries input of
+        Error err       -> putStr $ "Failed to read JSON data: " ++ show err
+        Success entries -> putStr $ show entries
+    return ()
 
