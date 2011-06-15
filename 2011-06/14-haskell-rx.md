@@ -4,6 +4,27 @@ A while a ago I hacked quite a lot on Reactive Extensions for Javascript, which 
 
 A few days ago I decided to try to write a version of [Rx in Haskell](http://github.com/raimohanska/rx-haskell), and that's what I'm going to tell you about in this post. In the following, I expect you to understand some Haskell and to know the basic concepts of Reactive Extensions.  
 
+Briefly, Rx is a framework for reactive programming. The main concept there if Observable, which is a source of events that you can subscribe to. The thing that makes Rx interesting is the concept of Combinators. For instance, in Rx for Javascript, you can create Observables for click events of HTML buttons. In the following example (Thanks, Joni) these clicks are first mapped in to integers +1 and -1 using the `Select` combinator, then merged into a single `Observable` using `Merge`, then converted into a sum using `Scan`. Finally, a side-effect is added using `Subscribe`: a label is updated so that it will display a counter that can be increased and decreased by pressing the + and - buttons. 
+
+~~~ {.javascript}
+$(function() {
+  function always(x) { return function(_) { return x }}
+
+  var incr = $('#incr').toObservable('click').Select(always(1))
+  var decr = $('#decr').toObservable('click').Select(always(-1))
+
+  incr.Merge(decr)
+    .Scan(0, function(total, x) { return total + x })
+    .Subscribe(updateCount)
+
+  function updateCount(total) {
+    $('#count').html(total)
+  }
+})
+~~~
+
+Please read some of Matt Podwysocki's postings on Rx, such as [this one](http://codebetter.com/matthewpodwysocki/2010/02/23/introduction-to-the-reactive-extensions-for-javascript-creating-observables/). I've also written some rants about Rx on my blog, such as [this one](http://nullzzz.blogspot.com/2011/02/game-programming-with-rx-js.html)
+
 ## Rx with typeclasses
 
 So, with my background in OOP, I began by declaring a typeclass for
