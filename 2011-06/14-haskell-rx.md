@@ -1,10 +1,10 @@
-# Rx for Haskell, or my adventure in the land of typeclasses
+# Rx for Haskell, My First Monad
 
 A while a ago I hacked quite a lot on Reactive Extensions for Javascript, which resulted in writing a simple game [Worzone](http://juhajasatu.com/worzone) and posting a bunch of blog posts. Lately I've been more interested in learning Haskell.
 
 A few days ago I decided to try to write a version of [Rx in Haskell](http://github.com/raimohanska/rx-haskell), and that's what I'm going to tell you about in this post. In the following, I expect you to understand some Haskell and to know the basic concepts of Reactive Extensions.  
 
-Briefly, Rx is a framework for reactive programming. The main concept there if Observable, which is a source of events that you can subscribe to. The thing that makes Rx interesting is the concept of Combinators. For instance, in Rx for Javascript, you can create Observables for click events of HTML buttons. In the following example (Thanks, Joni) these clicks are first mapped in to integers +1 and -1 using the `Select` combinator, then merged into a single `Observable` using `Merge`, then converted into a sum using `Scan`. Finally, a side-effect is added using `Subscribe`: a label is updated so that it will display a counter that can be increased and decreased by pressing the + and - buttons. 
+Briefly, Rx is a framework for reactive programming. The main concept there if Observable, which is a source of events that you can subscribe to. The thing that makes Rx interesting is the concept of Combinators. For instance, in Rx for Javascript, you can create Observables for click events of HTML buttons. In the following example (Stolen from Joni Freemans's [learn-rx](https://github.com/jonifreeman/learn-rx) slide, thanks) these clicks are first mapped in to integers +1 and -1 using the `Select` combinator, then merged into a single `Observable` using `Merge`, then converted into a sum using `Scan`. Finally, a side-effect is added using `Subscribe`: a label is updated so that it will display a counter that can be increased and decreased by pressing the + and - buttons. 
 
 ~~~ {.javascript}
 $(function() {
@@ -136,7 +136,7 @@ For me, this seems a bit less elegant, as I have to explicitly say `observableLi
 
 ## Monads Gonads
 
-Now that's convenient. But, as Joni Freeman has convinced me,  `Observables` are actually  `Monads` and  `Functors` too, so I wanted to make an instance for each. Like
+Now that's convenient. But, as [Joni](http://www.blogger.com/profile/14681962414515356062) has convinced me,  `Observables` are actually  `Monads` and  `Functors` too, so I wanted to make an instance for each. Like
 
 ~~~ {.haskell}
 instance Functor Observable where
