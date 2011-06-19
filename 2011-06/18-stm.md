@@ -1,4 +1,4 @@
-# A Luxury Vehicle Called The STM Monad
+# Ride the STM Monad
 
 A couple of days ago I didn't know much about how you handle mutable state in concurrent Haskell programs. Then I thought about STM (Software Transactional Memory) the idea of which is that you can do your business with your mutable state in a transactional way. 
 
