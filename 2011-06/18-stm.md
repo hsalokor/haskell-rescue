@@ -2,7 +2,7 @@
 
 A couple of days ago I didn't know much about how you handle mutable state in concurrent Haskell programs. Then I thought about STM (Software Transactional Memory) the idea of which is that you can do your business with your mutable state in a transactional way. 
 
-The classic toy example is the Bank that holds its account balances in the memory of a computer. It wants to make sure that when dollars are transferred from account to account, i.e. money is taken from an account and added to another, this happens as a complete transaction, or does not happen at all. Please read Simon Peyton Jones's paper on the subject: [Beautiful concurrency](http://research.microsoft.com/en-us/um/people/simonpj/papers/stm/beautiful.pdf). 
+The classic toy example is the Bank that holds its account balances in the memory of a computer. It wants to make sure that when dollars are transferred from account to account, i.e. money is taken from an account and added to another, this happens as a complete transaction, or does not happen at all. Please read Simon Peyton Jones's paper on Haskell STM: [Beautiful concurrency](http://research.microsoft.com/en-us/um/people/simonpj/papers/stm/beautiful.pdf). I mean really, you should read it. Even though Simon stores his account balances in RAM :) 
 
 Anyways, you could solve the bank problem using Locks, but they are
 quite prone to deadlocks. In the STM model, there are no locks, but instead it "optimistically" tries to do your stuff and if a conflict with another thread occurs, it does a rollback and tries again. Nice? Here's how you could do it in Haskell: 
@@ -56,3 +56,6 @@ Monads kick ass!
 
 And no, I'm not writing an online banking system. But, I'd
 certainly use Haskell if I was.
+
+Btw, when using STM in Clojure, is there really any guarantee that your
+transactional code doesn't have irreversible side-effects?
