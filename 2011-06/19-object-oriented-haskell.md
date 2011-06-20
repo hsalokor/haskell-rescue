@@ -1,7 +1,7 @@
 # Object-Oriented Haskell
 
 I wanted to get back to the subject of how a coder with OO background
-can product Haskell code. Haskell is not an object-oriented language,
+can pick on Haskell. Haskell is not an object-oriented language,
 but surely has facilities for doing similar things. Separating interface
 from implementation is a must. I'm running a bit short on good examples
 now, but let's pretend we are in a desperate need of a new logging
