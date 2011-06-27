@@ -86,7 +86,7 @@ type Log = String -> IO ()
 sysOutLogger threshold = Logger (log Info) (log Warn) (log Error)
   where log lvl msg = when (lvl >= threshold) $ putStrLn $ show lvl ++ " - " ++ msg
 
-~~
+~~~
 
 With this logger, you can specify the logging threshold in the
 constructor. See:
