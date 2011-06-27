@@ -84,9 +84,9 @@ data Level = Info|Warn|Error deriving (Show, Ord, Eq)
 type Log = String -> IO ()
 
 sysOutLogger threshold = Logger (log Info) (log Warn) (log Error)
-  where log level msg = when (level >= threshold) $ putStrLn $ (show level) ++ " - " ++ msg
+  where log lvl msg = when (lvl >= threshold) $ putStrLn $ show lvl ++ " - " ++ msg
 
-~~~
+~~
 
 With this logger, you can specify the logging threshold in the
 constructor. See:
