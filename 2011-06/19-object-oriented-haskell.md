@@ -28,7 +28,7 @@ to start writing the EJBLogger class.
 In Javascript, there are no
 interfaces, but you can call any method with any arguments on any
 object. So you may agree that the logger API consists of these three
-methods and that all logger implementations must have them. The
+methods and an agreement that all logger implementations must have them. The
 "interface" is actually the API documentation.
 
 But, in Haskell? We've got
@@ -59,7 +59,7 @@ var ConsoleLogger = function() {
 } 
 ~~~
 
-Got it? The Haskell version isn't so different:
+The Haskell version isn't so different:
 
 ~~~ {.haskell}
 data Logger = Logger { info :: Log, warn :: Log, error :: Log }
@@ -73,7 +73,7 @@ Logger. It also appears a bit shorter, because of Haskell's more compact
 formatting conventions and its support for partially applied functions
 (currying).
 
-In the above example, the closure, or the hidden part of the "object" actually consists of the statically defined method `log`. In the next example, there's also a "constructor parameter" involved:
+In the above example, the closure, or the hidden part of the "object" actually consists of the statically defined method `log`. In the next example, there's also a constructor parameter involved:
 
 ~~~ {.haskell}
 
@@ -134,11 +134,9 @@ Service at all. Like
 data Quote = Quote { name :: String, value :: Int } deriving (Show)
 data QuoteService = QuoteService { fetch :: IO [Quote] }
 
-realQuoteService url = QuoteService fetch
-  where fetch = undefined
+realQuoteService url = QuoteService undefined
 
-fakeQuoteService = QuoteService fetch
-  where fetch = return [ Quote "NOK" 0 ]
+fakeQuoteService = QuoteService $ return [ Quote "NOK" 0 ]
 
 ~~~
 
