@@ -65,3 +65,20 @@ Except for, of course, that it's type-safe and has a real interface for
 Logger. It also appears a bit shorter, because of Haskell's more compact
 formatting conventions and its support for partially applied functions
 (currying).
+
+Adding some state, or hidden data into the Logger "object:"
+
+TODO
+
+~~~ {.haskell}
+
+import Control.Monad(when)
+
+data Logger = Logger { info :: Log, warn :: Log, error :: Log }
+data Level = Info|Warn|Error deriving (Show, Ord, Eq)
+type Log = String -> IO ()
+
+sysOutLogger threshold = Logger (log Info) (log Warn) (log Error)
+  where log level msg = when (level >= threshold) $ putStrLn $ (show level) ++ " - " ++ msg
+
+~~~
