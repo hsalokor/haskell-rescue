@@ -30,12 +30,35 @@ I should say that
 Here [String] means a list of strings and IO means that the function is not pure: 
 it performs some IO, and hence is not necessarily deterministic and may have side-effects.
 
-In Haskell, you could write this like here:
+Transformed to Haskell, you could have something like this:
 
 ~~~ .haskell
-
-Prelude System.Directory Data.List> readFile "lolcats.txt" >>= return . filter (isInfixOf "cat") . lines >>= (flip writeFile) ""
-
+readLolCats :: IO [String]
+grepCats :: [String] -> IO [String]
+writeCatFiles :: [String] -> IO ()
 ~~~ 
 
+Let's just assume that these functions were already implemented and see how we can chain them together.
+Well, that would be using the `>>=` operator. 
+
+So the whole thing would go like 
+
+~~~ .haskell
+readLolCats >>= grepCats >>= writeCatFiles
+~~~
+
+I would say that the `>>=` operator is the equivalent of the pipe for Haskell IO!
+
+Now, suppose we wanted to implement the funcions above.
+
 TODO
+
+
+In `ghci` we can have a look at the signature of this operator:
+
+~~~ .haskell
+Prelude> :t (>>=)
+(>>=) :: Monad m => m a -> (a -> m b) -> m b
+~~~
+
+That means that the operator (actually a function) is applicable to any Monad `m`  and for any types `a` and `b`.
