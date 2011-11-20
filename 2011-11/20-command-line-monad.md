@@ -18,13 +18,12 @@ Let's now try to define the "type signature" of these commands.
 So, suppose you have a command-line like
 
 ~~~ .bash
-cat lolcats.txt | grep cat | xargs touch
+cat lolcats.txt | xargs touch
 ~~~
 
 I should say that
 
 "cat lolcats.txt" :: IO [String]
-"grep cat"        :: [String] -> IO [String]
 "xargs touch"     :: [String] -> IO ()
 
 Here [String] means a list of strings and IO means that the function is not pure: 
@@ -34,7 +33,6 @@ Transformed to Haskell, you could have something like this:
 
 ~~~ .haskell
 readLolCats :: IO [String]
-grepCats :: [String] -> IO [String]
 writeCatFiles :: [String] -> IO ()
 ~~~ 
 
@@ -44,7 +42,7 @@ Well, that would be using the `>>=` operator.
 So the whole thing would go like 
 
 ~~~ .haskell
-readLolCats >>= grepCats >>= writeCatFiles
+readLolCats >>= writeCatFiles
 ~~~
 
 I would say that the `>>=` operator is the equivalent of the pipe for Haskell IO!
@@ -52,7 +50,6 @@ I would say that the `>>=` operator is the equivalent of the pipe for Haskell IO
 Now, suppose we wanted to implement the funcions above.
 
 TODO
-
 
 In `ghci` we can have a look at the signature of this operator:
 
