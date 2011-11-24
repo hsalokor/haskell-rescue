@@ -51,7 +51,7 @@ readLolCats >>= writeCatFiles
 
 I'd like to say that the `>>=` operator is the equivalent of the shell pipe for Haskell IO!
 
-The functions above could be implemente like
+The functions above could be implemented like
 
 ~~~ .haskell
 grepCats = return . filter (isInfixOf "cat")
