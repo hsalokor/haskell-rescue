@@ -24,12 +24,13 @@ cat lolcats.txt | xargs touch
 I should say that
 
 "cat lolcats.txt" :: IO [String]
+
 "xargs touch"     :: [String] -> IO ()
 
 Here [String] means a list of strings and IO means that the function is not pure: 
 it performs some IO, and hence is not necessarily deterministic and may have side-effects.
 
-Transformed to Haskell, you could have something like this:
+Transformed to Haskell, you could have functions like this:
 
 ~~~ .haskell
 readLolCats :: IO [String]
