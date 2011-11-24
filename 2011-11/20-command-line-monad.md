@@ -67,7 +67,7 @@ return :: Monad m => a -> m a
 filter (isInfixOf "cat") :: [[Char]] -> [[Char]]
 ~~~
 
-So, return seems to be related to something called Monads. 
+So, `return` seems to be related to something called Monads. 
 Buy hey, IO is a Monad, so practically `return` takes any value a and returns IO a.
 Thus is allows you to inject a value "into IO". Or any monad. Let's say IO though.
 
