@@ -72,7 +72,7 @@ Buy hey, IO is a Monad, so practically `return` takes any value a and returns IO
 Thus is allows you to inject a value "into IO". Or any monad. Let's stick to IO for now, though.
 
 The latter part says that it filters a list of Strings, keeping only those that include "cat". 
-The type signature [[Char]] -> [[Char]] is equivalent to [String] -> [String].
+The type signature `[[Char]] -> [[Char]]` is equivalent to `[String] -> [String]` (Strings are just lists of Chars).
 
 When we compose these functions using `.`, we get a function having a type signature like
 
