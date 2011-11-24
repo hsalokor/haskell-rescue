@@ -48,7 +48,7 @@ So the whole thing would go like
 readLolCats >>= writeCatFiles
 ~~~
 
-I would say that the `>>=` operator is the equivalent of the shell pipe for Haskell IO!
+I'd like to say that the `>>=` operator is the equivalent of the shell pipe for Haskell IO!
 
 The functions above could be implemente like
 
@@ -82,19 +82,52 @@ grepCats :: [String] -> IO [String]
 
 We knew that though, right.
 
-How does `writeCatFiles` work, then? Well, it uses mapM_, which is Haskell's equivalent to forEach in some languages.
-
-TODO
-
-.......... 
-
-
-
-In `ghci` we can have a look at the signature of this operator:
+How does `writeCatFiles` work, then? Well, it uses mapM_, which is Haskell's equivalent to forEach in some languages: 
+it does something with each of the elements in the given list.
 
 ~~~ .haskell
-Prelude> :t (>>=)
-(>>=) :: Monad m => m a -> (a -> m b) -> m b
+*CommandPrompt> :t mapM_
+mapM_ :: Monad m => (a -> m b) -> [a] -> m ()
 ~~~
 
-That means that the operator (actually a function) is applicable to any Monad `m`  and for any types `a` and `b`.
+As you can see, it takes a function that is applicable to the elements in the given list of values of type `a`. 
+We are using it in the IO monad, so practially mapM_ applies the given function `a -> IO b` to all elements. 
+The return type b doesn't matter; mapM_ discards the possible return value. Hence, your function may very well be
+of type `a -> IO ()`. 
+
+In our `writeCatFiles` function, we provide mapM_ with `(flip writeFile $ "")` which has the
+type `FilePath -> IO()`. Now FilePath is actually a typeclass and there's a String-instance for it, so String can
+be used instead of FilePath. So why `flip`? That's because we need to be able to feed file names to this function.
+It just happens to be that `writeFile` has file name as its first parameter and file contents as the second.
+With `flip` we can reverse the ordering of the parameters, and by currying the flipped function with "", we get 
+a function that accepts a filename and writes the empty string into that file.
+
+Currying? Well, suppose you've got a function with two params, like
+
+~~~ .haskell
+*CommandPrompt> :t flip writeFile
+flip writeFile :: String -> FilePath -> IO ()
+~~~
+
+Here the function `(flip writeFile)` accepts first file contents and then the file name. 
+Now if we apply one parameter, we get
+
+~~~ .haskell
+*CommandPrompt> :t (flip writeFile) $ ""
+(flip writeFile) "" :: FilePath -> IO ()
+~~~
+
+.. which is acceptable for our little "for-loop" : we can use this function as the first argument for mapM_ and get
+the empty string written to all files given in the input list.
+
+So, currying is just applying a parameter to a function, and getting another function with one less param.
+
+Now what exactly is a Monad?
+============================
+
+One way to put it is that its a type for actions that can be chained using the >>= operator. 
+Also, a Monad needs to have the `return` function defined, for injecting values into the monad.
+
+So in terms of `bash`, you can say that the pipe ´|´ is the equivalent of `>>=`.
+
+Now, what would be the bash-equivalent of `return`? A free T-shirt for the first correct answer!
