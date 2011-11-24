@@ -58,6 +58,7 @@ writeCatFiles =  mapM_ (flip writeFile $ "")
 ~~~
 
 Say what? The first function uses `.` to compose two functions. What are their types? Let's ask GHCI:
+
 ~~~ .haskell
 *CommandPrompt> :t return
 return :: Monad m => a -> m a
