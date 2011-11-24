@@ -1,7 +1,7 @@
 The Bash Monad
 ==============
 
-You ar probably aware of using Unix command-line tools and chaining them together using the pipe (|). 
+You've probably used some Unix command-line tools and chained them together using the pipe (|). 
 This is very much similar to how monadic Haskell programs work: you chain a bunch of IO actions together using the `>>=` symbol.
 
 When writing this kind of chains, you are usually interested in these aspects of each of the tools in the chain:
