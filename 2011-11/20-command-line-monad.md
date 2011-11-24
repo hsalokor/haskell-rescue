@@ -23,9 +23,10 @@ cat lolcats.txt | xargs touch
 
 I should say that
 
+~~~ .haskell
 "cat lolcats.txt" :: IO [String]
-
 "xargs touch"     :: [String] -> IO ()
+~~~
 
 I'm using the Haskell type signature notation here. There [String] means a list of strings and IO means that the function is not pure: 
 it performs some IO, and hence is not necessarily deterministic and may have side-effects. 
