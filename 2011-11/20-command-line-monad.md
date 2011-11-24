@@ -1,5 +1,5 @@
-The Command Prompt Monad
-========================
+The Bash Monad
+==============
 
 You ar probably aware of using Unix command-line tools and chaining them together using the pipe (|). 
 This is very much similar to how monadic Haskell programs work: you chain a bunch of IO actions together using the `>>=` symbol.
@@ -27,10 +27,12 @@ I should say that
 
 "xargs touch"     :: [String] -> IO ()
 
-Here [String] means a list of strings and IO means that the function is not pure: 
-it performs some IO, and hence is not necessarily deterministic and may have side-effects.
+I'm using the Haskell type signature notation here. There [String] means a list of strings and IO means that the function is not pure: 
+it performs some IO, and hence is not necessarily deterministic and may have side-effects. 
+The `xargs touch` part has a signature `IO ()` (pronounces IO unit) that indicates that it consumes a list of strings and performs an IO action
+that doesn't return any value.
 
-Transformed to Haskell, you could have functions like this:
+If you wrote this as a Haskell program, you could have functions like this:
 
 ~~~ .haskell
 readLolCats :: IO [String]
@@ -46,11 +48,27 @@ So the whole thing would go like
 readLolCats >>= writeCatFiles
 ~~~
 
-I would say that the `>>=` operator is the equivalent of the pipe for Haskell IO!
+I would say that the `>>=` operator is the equivalent of the shell pipe for Haskell IO!
 
-Now, suppose we wanted to implement the funcions above.
+The functions above could be implemente like
 
-TODO
+~~~ .haskell
+grepCats = return . filter (isInfixOf "cat")
+writeCatFiles =  mapM_ (flip writeFile $ "")
+~~~
+
+Say what? The first function uses `.` to compose two functions. What are their types? Let's ask GHCI:
+~~~ .haskell
+*CommandPrompt> :t return
+return :: Monad m => a -> m a
+*CommandPrompt> :t filter (isInfixOf "cat")
+filter (isInfixOf "cat") :: [[Char]] -> [[Char]]
+~~~
+
+
+.......... 
+
+
 
 In `ghci` we can have a look at the signature of this operator:
 
