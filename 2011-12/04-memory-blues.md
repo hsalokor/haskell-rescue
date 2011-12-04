@@ -2,7 +2,7 @@
 
 I recently started playing around with a [Linode](http://www.linode.com)
 instance. It's a really nice service and I wanted to kick the tires  with couple of
-Haskell projects. The default instance comes with 512MB of memory, and this should be
+Haskell projects. The smallest instance comes with 512MB of memory, and this should be
 reasonably enough for everybody. Except for `ghc` and `ld`, it seems :)
 
 ## The problem
