@@ -9,6 +9,10 @@ reasonably enough for everybody. Except for `ghc` and `ld`, it seems :)
 
 ## The problem
 
+I installed [Yesod](http://www.yesodweb.com/) web framework from scratch using cabal
+
+    cabal install yesod
+
 I quickly noticed that installing software with `cabal` caused a huge load spike
 to host. I whipped out my trusty [htop](ihttp://htop.sourceforge.net/) and
 noticed that process `ld` (the linker). was sucking up 500MB of memory and
@@ -36,10 +40,12 @@ So, it just installed it with command
 
     sudo apt-get install binutils-gold
 
-and rerun the compiler.
+and rerun the
+
+    cabal install yesod
 
 The compilation seemed to go through smoothly, and `ld` didn't cause any memory
-spikes. As such, using the `binutils-gold` package solved my particular memory
+spikes. As such, using the `binutils-gold` package seemed to solve this particular memory
 blues.
 
 ## The disclaimer
