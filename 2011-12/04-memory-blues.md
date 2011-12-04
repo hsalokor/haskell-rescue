@@ -1,10 +1,8 @@
 # Memory blues
 
 I recently started playing around with a [Linode](http://www.linode.com)
-instance. It's a really nice service and I wanted to play around with couple of
-Haskell projects.
-
-The default instance comes with 512MB of memory, and this should be
+instance. It's a really nice service and I wanted to kick the tires  with couple of
+Haskell projects. The default instance comes with 512MB of memory, and this should be
 reasonably enough for everybody. Except for `ghc` and `ld`, it seems :)
 
 ## The problem
@@ -52,9 +50,9 @@ blues.
 
 The `gold` linker is experimental software, and is known not to compile some
 software correctly (such kernel modules). As such, using it is a tradeoff. In
-my case the standard linker just didn't work, so the new
-Fortunately, it can be quite easily removed by uninstalling the `binutils-gold`
-package - system will revert back to stock ld.
+my case the standard linker just didn't work.  Fortunately, the experimental
+linker can be quite easily removed by uninstalling the `binutils-gold` package -
+system will revert back to stock ld.
 
 Anyway, if you happen to run into this particular problem, try the
 `binutils-gold`. Rumour is that the optimized `ld` might even help with
