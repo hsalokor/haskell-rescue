@@ -32,7 +32,7 @@ Then I came across a [Stack Overflow
 discussion](ttp://stackoverflow.com/questions/3476093/replacing-ld-with-gold-any-experience)
 about [`gold`](http://en.wikipedia.org/wiki/Gold_%28linker%29) linker, which is
 experimental optimized linker. There's a Ubuntu package for that,
-`binutils-gold` which conveniently replaces the system `ld` with the
+`binutils-gold` which conveniently replaces the system `ld` with the with the experimental optimized linker.
 
 So, it just installed it with command
 
