@@ -1,6 +1,3 @@
-Making Your Own Action Monads
-=============================
-
 I call monads like IO and STM "action monads", because each monadic
 value, such as `getName :: IO String` is actually an action that will 
 yield the value when executed. In this posting I'll throw you a
